@@ -35,8 +35,8 @@ public class Personagem {
      */
     void eat() {
         if (fome >= 1) {
-            fome -= 1;
-            energia += 1;
+            fome--;
+            energia++;
             energia = Math.min(energia + 1, 10);
             System.out.printf("%s se alimentou e tem %d de energia.\n", nome, energia);
         } else
@@ -50,8 +50,8 @@ public class Personagem {
      */
     void sleep() {
         if (sono >= 1) {
-            sono -= 1;
-            energia += 1;
+            sono--;
+            energia++;
             System.out.println(nome + " foi dormir, e está com " + sono + " de sono e " + energia + " de energia.\n");
         } else {
             System.out.println(nome + " está sem sono!\n");

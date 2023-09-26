@@ -1,9 +1,9 @@
 public class Personagem {
     // Variáveis de instância => A instância é sinônimo de um objeto
-    String nome;
-    int energia;
-    int fome;
-    int sono;
+    private String nome;
+    private int energia;
+    private int fome;
+    private int sono;
 
     // Tipos de retorno e lista de parâmetros
     public Personagem(String nome, int energia, int fome, int sono) {
@@ -25,7 +25,7 @@ public class Personagem {
         } else
             System.out.println(nome + " está sem energia!");
         fome = Math.min(fome + 1, 10);
-        sono = Math.min(sono + 1, 10);
+        sono = sono + 1 > 10 ? 10 : sono + 1;
     }
 
     /*

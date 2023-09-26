@@ -1,15 +1,18 @@
 public class Personagem {
     // Variáveis de instância => A instância é sinônimo de um objeto
     private String nome;
-    private int energia;
-    private int fome;
-    private int sono;
+    private int energia = 10;
+    private int fome = 0;
+    private int sono = 0;
 
     // Tipos de retorno e lista de parâmetros
-    public Personagem(String nome, int energia, int fome, int sono) {
-        this.nome = nome;
+    public Personagem(String name) {
+        this.nome = name;
+    }
+
+    public Personagem(int energia, int fome, int sono) {
         this.energia = energia;
-        this.fome = fome;
+        this.fome = fome > 10 || fome < 0 ? this.fome : fome;
         this.sono = sono;
     }
 

@@ -4,16 +4,21 @@ public class Personagem {
     private int energia = 10;
     private int fome = 0;
     private int sono = 0;
+    private int inventory = 0;
+    private boolean alive = true;
 
     // Tipos de retorno e lista de parâmetros
     public Personagem(String name) {
         this.nome = name;
     }
 
-    public Personagem(int energia, int fome, int sono) {
+    public Personagem(int energia, int fome, int sono, int inventory) {
         this.energia = energia;
         this.fome = fome > 10 || fome < 0 ? this.fome : fome;
         this.sono = sono;
+        this.alive = true;
+        this.inventory = inventory > 10 || inventory < 0 ? this.inventory : inventory;
+        ;
     }
 
     /*
@@ -25,6 +30,7 @@ public class Personagem {
         if (energia >= 2) {
             energia -= 2;
             System.out.println(nome + " foi caçar, e tem " + energia + " de energia.");
+            inventory += 1;
         } else
             System.out.println(nome + " está sem energia!");
         fome = Math.min(fome + 1, 10);
@@ -37,11 +43,14 @@ public class Personagem {
      * maior ou igual a 1.
      */
     void eat() {
-        if (fome >= 1) {
+        if (fome >= 1 && inventory >= 1) {
             fome--;
             energia++;
             energia = Math.min(energia + 1, 10);
-            System.out.printf("%s se alimentou e tem %d de energia.\n", nome, energia);
+            inventory -= 1;
+            System.out.printf("%s se alimentou e tem %d de energia e %d alimentos..\n", nome, energia, inventory);
+        } else if (fome >= 1 && inventory < 1) {
+            System.out.println(nome + " não tem o que comer!");
         } else
             System.out.println(nome + " está sem fome!");
     }
@@ -55,10 +64,22 @@ public class Personagem {
         if (sono >= 1) {
             sono--;
             energia++;
+            energia = Math.min(energia + 1, 10);
             System.out.println(nome + " foi dormir, e está com " + sono + " de sono e " + energia + " de energia.\n");
         } else {
             System.out.println(nome + " está sem sono!\n");
         }
+    }
+
+    boolean isAlive() {
+        if (sono == 10 || fome == 10 || energia == 0)
+            die();
+        return alive;
+    }
+
+    void die() {
+        alive = false;
+        System.out.println("Oh não! " + nome + " morreu.");
     }
 
 }
